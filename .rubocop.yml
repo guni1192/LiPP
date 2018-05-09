@@ -1,0 +1,32 @@
+AllCops:
+  EnabledByDefault: true
+  Exclude:
+    - bin/**/*
+    - config/**/*
+    - db/**/*
+    - vendor/**/*
+    - node_modules/**/*
+
+Rails:
+  Enabled: true
+AsciiComments:
+  Enabled: false
+Documentation:
+  Enabled: false
+
+Style/DocumentationMethod:
+  Enabled: false
+Style/Copyright:
+  Enabled: false
+Style/MethodCalledOnDoEndBlock:
+  Enabled: false
+Style/MethodCallWithArgsParentheses:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+
