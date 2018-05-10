@@ -36,6 +36,9 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-github'
 
+# GitHub API
+gem 'octokit'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
