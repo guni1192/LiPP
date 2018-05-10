@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class ReposController < ApplicationController
@@ -7,9 +9,7 @@ module Api
         render json: client.repos
       end
 
-      def show
-      end
+      def show; end
     end
   end
 end
-
