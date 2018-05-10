@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -14,7 +16,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
   let(:user) { User.new }
 
   it '有効なユーザーのバリデーション' do
@@ -37,6 +38,4 @@ RSpec.describe User, type: :model do
     user.name = 'user'
     expect(user).not_to(be_valid)
   end
-
 end
-

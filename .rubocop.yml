@@ -22,6 +22,8 @@ Style/MethodCalledOnDoEndBlock:
   Enabled: false
 Style/MethodCallWithArgsParentheses:
   Enabled: false
+Style/DoubleNegation:
+  Enabled: false
 
 Metrics/LineLength:
   Enabled: false
