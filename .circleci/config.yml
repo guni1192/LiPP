@@ -1,7 +1,6 @@
 version: 2
 jobs:
   build:
-    parallelism: 3
     working_directory: ~/circleci-hujiwara-kai
     docker:
       - image: circleci/ruby:2.5-node-browsers
