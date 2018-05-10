@@ -9,7 +9,11 @@ module Api
         render json: client.repos
       end
 
-      def show; end
+      def show
+        user = current_user
+        client = Octokit::Client.new(access_token: user.oauth_token)
+        render json: client.repository(params[:id].to_i)
+      end
     end
   end
 end
