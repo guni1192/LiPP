@@ -1,6 +1,10 @@
 {
   "name": "hujiwara-kai",
   "private": true,
+  "scripts": {
+    "lint": "eslint app/javascript/*",
+    "lint:fix": "eslint app/javascript/* --fix"
+  },
   "dependencies": {
     "@rails/webpacker": "3.5",
     "material-design-icons-iconfont": "^3.0.3",
@@ -10,6 +14,11 @@
     "vuetify": "^1.0.17"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-config-vue": "^2.0.2",
+    "eslint-plugin-vue": "^4.5.0",
+    "vue-eslint-parser": "^2.0.3",
     "webpack-cli": "^2.1.3",
     "webpack-dev-server": "2.11.2"
   }
