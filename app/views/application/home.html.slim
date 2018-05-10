@@ -1,0 +1,6 @@
+= javascript_pack_tag 'hello_vue'
+
+- if logged_in?
+  = link_to 'Logout', '/logout'
+- else
+  = link_to 'Githubアカウントでログイン', '/auth/github'
