@@ -1,9 +1,9 @@
 <template>
   <div id="user-home">
     <img
-      id="user_icon"
-      :src="user.avatar_url"
-      alt=""><br>
+    id="user_icon"
+    :src="user.avatar_url"
+    alt=""><br>
     <h1><a :href="user.html_url">{{ user.login }}</a></h1>
   </div>
 </template>
@@ -26,7 +26,7 @@ export default {
         .then((response) => {
           this.user = response.data
         })
-    }
+    },
   }
 }
 </script>

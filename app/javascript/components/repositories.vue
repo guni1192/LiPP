@@ -7,9 +7,11 @@
         :key="repo.id"
         @click="goRepoPath">
         <v-list-tile-title>{{ repo.name }}</v-list-tile-title>
-        <a :href="repo.html_url"><v-icon
-          dark
-          left>code</v-icon></a>
+        <a :href="repo.html_url">
+          <v-btn icon ripple>
+            <v-icon dark >code</v-icon>
+          </v-btn>
+        </a>
       </v-list-tile>
     </v-list>
   </div>
@@ -40,4 +42,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+a {
+  text-decoration: none;
+}
 </style>

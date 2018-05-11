@@ -55,9 +55,11 @@
     >
       <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
       <v-icon class="mx-3">fab fa-youtube</v-icon>
+      <router-link to="/">
       <v-toolbar-title class="mr-5 align-center">
         <span class="title">Hujiwara</span>
       </v-toolbar-title>
+      </router-link>
       <v-spacer/>
     </v-toolbar>
     <slot/>
@@ -89,9 +91,8 @@ export default {
       router.push({ path: path })
     },
     redirect: function (href) {
-      location.href = '/logout'
+      location.href = href
     }
-
   }
 
 }
