@@ -65,6 +65,10 @@ jobs:
           name: RSpec
           command: bundle exec rspec
 
+      - run:
+          name: ESLint
+          command: yarn lint
+
       # Save test results for timing analysis
       - store_test_results:
           path: test_results
