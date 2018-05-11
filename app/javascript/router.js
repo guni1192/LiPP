@@ -11,7 +11,7 @@ const routes = [
   // { path: '/projects/new', component: AddProject },
   // { path: '/projects/edit/:id', component: EditProject },
   // { path: '/projects/:id', component: ProjectInfo, name: 'project' },
-  { path: '/user/info', component: UserInfo },
+  { path: '/user/info', component: UserInfo }
 ]
 
 export default new VueRouter({ routes })

@@ -1,20 +1,13 @@
 <template>
   <div id="app">
     <v-app>
-      <v-content>
-        <v-container>
-          <navbar-component :user="user"></navbar-component>
-          <router-link to="/user/info">
-            <v-btn large depressed color="primary">
-              <img id="user_icon" :src="user.avatar_url" alt="">
-              {{ user.login }}
-            </v-btn>
-          </router-link>
-          <router-view />
-        </v-container>
-        </navbar-component>
-
-      </v-content>
+      <navbar-component :user="user">
+        <v-content>
+          <v-container>
+            <router-view />
+          </v-container>
+        </v-content>
+      </navbar-component>
     </v-app>
   </div>
 </template>
@@ -25,18 +18,18 @@ import NavbarComponent from './components/navbar.vue'
 
 export default {
   components: {
-    'navbar-component': NavbarComponent,
+    'navbar-component': NavbarComponent
   },
   data: function () {
     return {
       user: {}
     }
   },
-  mounted: function() {
+  mounted: function () {
     this.userInfo()
   },
   methods: {
-    userInfo: function() {
+    userInfo: function () {
       axios.get('/api/v1/user/detail')
         .then((response) => {
           this.user = response.data
@@ -47,9 +40,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-#user_icon {
-  height: 40px;
-  border-radius: 20px;
-  margin: 10px
-}
 </style>
