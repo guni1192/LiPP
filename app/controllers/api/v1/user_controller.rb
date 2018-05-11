@@ -4,7 +4,9 @@ module Api
   module V1
     class UserController < ApplicationController
       def detail
-        render json: current_user
+        user = current_user
+        client = Octokit::Client.new(access_token: user.oauth_token)
+        render json: client.user.to_hash
       end
     end
   end
