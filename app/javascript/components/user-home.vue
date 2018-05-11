@@ -1,6 +1,9 @@
 <template>
   <div id="user-home">
-    <img id="user_icon" :src="user.avatar_url" alt=""><br>
+    <img
+      id="user_icon"
+      :src="user.avatar_url"
+      alt=""><br>
     <h1><a :href="user.html_url">{{ user.login }}</a></h1>
   </div>
 </template>
@@ -14,11 +17,11 @@ export default {
       user: {}
     }
   },
-  mounted: function() {
+  mounted: function () {
     this.userInfo()
   },
   methods: {
-    userInfo: function() {
+    userInfo: function () {
       axios.get('/api/v1/user/detail')
         .then((response) => {
           this.user = response.data

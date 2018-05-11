@@ -2,8 +2,8 @@
   "name": "hujiwara-kai",
   "private": true,
   "scripts": {
-    "lint": "eslint app/javascript/*",
-    "lint:fix": "eslint app/javascript/* --fix"
+    "lint": "eslint --ext js,vue app/javascript/*",
+    "lint:fix": "eslint --ext js,vue app/javascript/* --fix"
   },
   "dependencies": {
     "@rails/webpacker": "3.5",
