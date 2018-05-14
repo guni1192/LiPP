@@ -20,6 +20,10 @@
 
     <div v-else>
       <h1 v-text="repo.full_name"/>
+      <a :href="repo.html_url">
+        <v-icon dark>fab fa-github</v-icon>
+      </a>
+
       <v-btn
         v-if="isRegisted"
         color="red"

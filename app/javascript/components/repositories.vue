@@ -36,7 +36,7 @@
           <v-btn
             icon
             ripple>
-            <v-icon dark >code</v-icon>
+            <v-icon>fab fa-github</v-icon>
           </v-btn>
         </a>
       </v-list-tile>
