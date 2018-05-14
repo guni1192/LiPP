@@ -2,13 +2,12 @@
   "name": "hujiwara-kai",
   "private": true,
   "scripts": {
-    "lint": "eslint app/javascript/*",
-    "lint:fix": "eslint app/javascript/* --fix"
+    "lint": "eslint --ext js,vue app/javascript/*",
+    "lint:fix": "eslint --ext js,vue app/javascript/* --fix"
   },
   "dependencies": {
     "@rails/webpacker": "3.5",
     "axios": "^0.18.0",
-    "material-design-icons-iconfont": "^3.0.3",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "vue": "^2.5.16",

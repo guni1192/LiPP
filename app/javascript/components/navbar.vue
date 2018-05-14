@@ -2,21 +2,28 @@
   <v-app
     id="inspire"
     dark
-    >
+  >
     <v-navigation-drawer
       v-model="drawer"
       fixed
       clipped
       app
-      >
+    >
       <v-list dense>
-        <v-list-tile avatar @click="goUserInfo">
+        <v-list-tile
+          avatar
+          @click="() => { goPath('/user/info') }">
           <v-list-tile-avatar>
-            <img :src="user.avatar_url" id="user-icon">
+            <img
+              id="user-icon"
+              :src="user.avatar_url">
           </v-list-tile-avatar>
-          <v-list-tile-title v-text="user.login"></v-list-tile-title>
+          <v-list-tile-title v-text="user.login"/>
         </v-list-tile>
-        <v-list-tile v-for="item in items" :key="item.text" @click="">
+        <v-list-tile
+          v-for="item in items"
+          :key="item.text"
+          @click="() => { goPath(item.path) }">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -26,6 +33,17 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile @click="() => { redirect('/logout') }">
+          <v-list-tile-action>
+            <v-icon>exit_to_app</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              Logout
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
       </v-list>
     </v-navigation-drawer>
     <v-toolbar
@@ -34,47 +52,45 @@
       fixed
       clipped-left
       app
-      >
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-icon class="mx-3">fab fa-youtube</v-icon>
-      <v-toolbar-title class="mr-5 align-center">
-        <span class="title">Hujiwara</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
+    >
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
+      <router-link to="/">
+        <v-toolbar-title class="mr-5 align-center">
+          <span class="title">Hujiwara</span>
+        </v-toolbar-title>
+      </router-link>
+      <v-spacer/>
     </v-toolbar>
-    <slot></slot>
+    <slot/>
   </v-app>
 </template>
-
 
 <script>
 import router from '../router'
 
 export default {
-  data: function() {
+  props: {
+    user: {
+      type: Object,
+      default: () => {},
+      required: false
+    }
+  },
+  data: function () {
     return {
-
       drawer: true,
       items: [
-        { icon: 'trending_up', text: 'Most Popular' },
-        { icon: 'subscriptions', text: 'Subscriptions' },
-        { icon: 'history', text: 'History' },
-        { icon: 'featured_play_list', text: 'Playlists' },
-        { icon: 'watch_later', text: 'Watch Later' }
-      ],
-      items2: [
-        { picture: 28, text: 'Joseph' },
-        { picture: 38, text: 'Apple' },
-        { picture: 48, text: 'Xbox Ahoy' },
-        { picture: 58, text: 'Nokia' },
-        { picture: 78, text: 'MKBHD' }
+        { path: '/dashboard', icon: 'dashboard', text: 'Dashboard' },
+        { path: '/repos', icon: 'apps', text: 'Repositories' }
       ]
     }
   },
-  props: ['user'],
   methods: {
-    goUserInfo: function() {
-      router.push({ path: '/user/info' })
+    goPath: function (path) {
+      router.push({ path: path })
+    },
+    redirect: function (href) {
+      location.href = href
     }
   }
 
@@ -82,4 +98,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+a {
+  text-decoration: none;
+  color: white;
+}
 </style>
