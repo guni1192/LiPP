@@ -1,0 +1,66 @@
+<template>
+  <div id="repo">
+    <v-container
+      v-if="isGetting"
+      grid-list-xl
+      text-xs-center>
+      <v-layout
+        row
+        wrap>
+        <v-flex
+          xs10
+          offset-xs1>
+          <v-progress-circular
+            :size="200"
+            indeterminate
+            color="red"/>
+        </v-flex>
+      </v-layout>
+    </v-container>
+
+    <div v-else>
+      <h1 v-text="repo.full_name"/>
+      <v-btn
+        v-if="isRegisted"
+        color="red"
+        @click="isRegisted = !isRegisted">Delete</v-btn>
+      <v-btn
+        v-else
+        color="green"
+        @click="isRegisted = !isRegisted">Add</v-btn>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+
+export default {
+  data: function () {
+    return {
+      repo: {},
+      isGetting: false,
+      isRegisted: false
+    }
+  },
+  mounted: function () {
+    this.getRepositoryInfo()
+  },
+  methods: {
+    getRepositoryInfo: function () {
+      this.isGetting = true
+      axios.get('/api/v1/repos/' + this.$route.params.id)
+        .then((response) => {
+          this.repo = response.data
+          this.isGetting = false
+        })
+    }
+  }
+}
+</script>
+
+<style scoped lang="scss">
+a {
+  text-decoration: none;
+}
+</style>

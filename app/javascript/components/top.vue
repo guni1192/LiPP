@@ -1,11 +1,15 @@
 <template>
   <div>
-    <v-jumbotron :gradient="gradient" dark>
+    <v-jumbotron
+      :gradient="gradient"
+      dark>
       <v-container fill-height>
         <v-layout align-center>
           <v-flex text-xs-center>
             <h3 class="display-3">Hujiwara is OSS PaaS</h3>
-            <v-btn color="success" @click="() => redirect('/auth/github')">
+            <v-btn
+              color="success"
+              @click="() => redirect('/auth/github')">
               Start Deploy Your App !!
             </v-btn>
           </v-flex>
