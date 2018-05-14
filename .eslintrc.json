@@ -30,7 +30,8 @@
         "semi": [
             "error",
             "never"
-        ]
+        ],
+        "camelcase": ["error", { "properties": "never" }]
     },
     "env": {
         "jasmine": true

@@ -31,7 +31,7 @@
       <v-btn
         v-else
         color="green"
-        @click="isRegisted = !isRegisted">Add</v-btn>
+        @click="addProjects">Add</v-btn>
     </div>
   </div>
 </template>
@@ -57,6 +57,14 @@ export default {
         .then((response) => {
           this.repo = response.data
           this.isGetting = false
+        })
+    },
+    addProjects: function () {
+      this.isGetting = true
+      axios.post('/api/v1/projects', { repo_id: this.repo.id })
+        .then(() => {
+          this.isGetting = false
+          this.isRegisted = !this.isRegisted
         })
     }
   }
