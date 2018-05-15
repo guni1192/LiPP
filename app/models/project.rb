@@ -12,8 +12,8 @@
 #
 
 class Project < ApplicationRecord
-  validates :repo_id, presence: true
   validates :user_id, presence: true
+  validates :repo_id, presence: true, uniqueness: true
 
   def github_info
     user = User.find_by(uid: user_id)
