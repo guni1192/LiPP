@@ -14,7 +14,7 @@ module Api
         if project
           render json: project
         else
-          render json: { error: 'Not found' }, status: 404
+          render json: { error: 'Not found' }, status: :not_found
         end
       end
 
@@ -32,7 +32,7 @@ module Api
           project.delete
           render json: { message: 'Success' }
         else
-          render json: { error: 'Not found' }, status: 404
+          render json: { error: 'Not found' }, status: :not_found
         end
       end
     end
