@@ -10,8 +10,12 @@ module Api
       end
 
       def show
-        project = Project.find(params[:id])
-        render json: project.github_info
+        project = Project.find_by(repo_id: params[:id])
+        if project
+          render json: project
+        else
+          render json: { error: 'Not found' }, status: 404
+        end
       end
 
       def create
@@ -23,7 +27,13 @@ module Api
       end
 
       def destroy
-        Project.find(params[:id]).delete
+        project = Project.find_by(repo_id: params[:id])
+        if project
+          project.delete
+          render json: { message: 'Success' }
+        else
+          render json: { error: 'Not found' }, status: 404
+        end
       end
     end
   end
