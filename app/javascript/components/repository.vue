@@ -43,13 +43,12 @@ export default {
   data: function () {
     return {
       repo: {},
-      isGetting: false,
+      isGetting: true,
       isRegisted: false
     }
   },
   mounted: function () {
     this.getRepositoryInfo()
-    this.getProjectInfo()
   },
   methods: {
     getRepositoryInfo: function () {
@@ -57,6 +56,7 @@ export default {
       axios.get('/api/v1/repos/' + this.$route.params.id)
         .then((response) => {
           this.repo = response.data
+          this.getProjectInfo()
         })
     },
     addProjects: function () {
