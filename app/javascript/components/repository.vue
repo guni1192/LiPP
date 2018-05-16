@@ -27,11 +27,11 @@
       <v-btn
         v-if="isRegisted"
         color="red"
-        @click="isRegisted = !isRegisted">Delete</v-btn>
+        @click="deleteProject">Delete</v-btn>
       <v-btn
         v-else
         color="green"
-        @click="isRegisted = !isRegisted">Add</v-btn>
+        @click="addProjects">Add</v-btn>
     </div>
   </div>
 </template>
@@ -43,7 +43,7 @@ export default {
   data: function () {
     return {
       repo: {},
-      isGetting: false,
+      isGetting: true,
       isRegisted: false
     }
   },
@@ -56,8 +56,29 @@ export default {
       axios.get('/api/v1/repos/' + this.$route.params.id)
         .then((response) => {
           this.repo = response.data
+          this.getProjectInfo()
+        })
+    },
+    addProjects: function () {
+      this.isGetting = true
+      axios.post('/api/v1/projects', { repo_id: this.repo.id })
+        .then(() => { this.getProjectInfo() })
+    },
+    getProjectInfo: function () {
+      this.isGetting = true
+      axios.get('/api/v1/projects/' + this.$route.params.id)
+        .then(() => {
+          this.isRegisted = true
           this.isGetting = false
         })
+        .catch(() => {
+          this.isRegisted = false
+          this.isGetting = false
+        })
+    },
+    deleteProject: function () {
+      axios.delete('/api/v1/projects/' + this.$route.params.id)
+        .then(() => { this.getProjectInfo() })
     }
   }
 }
