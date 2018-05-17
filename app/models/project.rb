@@ -12,12 +12,26 @@
 #
 
 class Project < ApplicationRecord
+  include Git
+
   validates :user_id, presence: true
   validates :repo_id, presence: true, uniqueness: true
 
-  def github_info
-    user = User.find_by(uid: user_id)
-    @client = Octokit::Client.new(access_token: user.oauth_token)
+  after_save :init_client
+
+  private
+
+  def repository
+    init_client
     @client.repository(repo_id)
+  end
+
+  def init_client
+    user = deployer
+    @client = Octokit::Client.new(access_token: user.oauth_token)
+  end
+
+  def deployer
+    User.find_by(uid: user_id)
   end
 end

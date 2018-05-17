@@ -4,6 +4,7 @@ module Api
   module V1
     class ProjectsController < ApplicationController
       protect_from_forgery with: :null_session
+
       def index
         projects = Project.where(user_id: User.first.uid)
         render json: projects
