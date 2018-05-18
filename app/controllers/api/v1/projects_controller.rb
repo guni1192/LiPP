@@ -24,7 +24,13 @@ module Api
           user_id: User.first.uid,
           repo_id: params[:repo_id]
         )
-        project.save if project.valid?
+        if project.valid?
+          project.save!
+          project.set_webhook
+          render json: project
+        else
+          render json: { error: 'Bad Request' }, status: :bad_request
+        end
       end
 
       def destroy

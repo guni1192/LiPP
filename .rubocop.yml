@@ -6,6 +6,7 @@ AllCops:
     - db/**/*
     - vendor/**/*
     - node_modules/**/*
+    - tmp/**/*
 
 Rails:
   Enabled: true

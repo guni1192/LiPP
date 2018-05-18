@@ -5,8 +5,8 @@ class GithubController < ApplicationController
     project = Project.where(user_id: params[:repository][:owner][:id])
                      .find_by(repo_id: params[:repository][:id])
 
-    project.clone_or_pull
-
     render json: project
+
+    project.clone_or_pull
   end
 end

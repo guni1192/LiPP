@@ -41,4 +41,18 @@ module Git
   def clone_path
     "#{clone_root}/#{repository[:full_name]}"
   end
+
+  def set_webhook
+    init_client
+    @client.create_hook(
+      repository[:full_name],
+      'web',
+      {
+        url: "#{ENV['HJWR_HOST']}/hooks",
+        content_type: 'json'
+      },
+      events: ['push'],
+      active: true
+    )
+  end
 end

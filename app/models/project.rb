@@ -13,6 +13,7 @@
 
 class Project < ApplicationRecord
   include Git
+  include Container
 
   validates :user_id, presence: true
   validates :repo_id, presence: true, uniqueness: true
