@@ -8,5 +8,6 @@ class GithubController < ApplicationController
     render json: project
 
     project.clone_or_pull
+    project.deploy
   end
 end

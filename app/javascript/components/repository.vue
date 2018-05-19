@@ -33,6 +33,17 @@
         color="green"
         @click="addProjects">Add</v-btn>
       <br>
+      <div v-show="status">
+        <v-chip
+          color="green"
+          text-color="white">
+          <v-avatar>
+            <v-icon>done</v-icon>
+          </v-avatar>
+          {{ status }}
+        </v-chip>
+      </div>
+
       <div v-show="logs">
         <pre><code>{{ logs }}</code></pre>
       </div>
@@ -49,11 +60,11 @@ export default {
       repo: {},
       isGetting: true,
       isRegisted: true,
-      logs: ''
+      logs: '',
+      status: ''
     }
   },
   mounted: function () {
-    // this.getRepositoryInfo()
     this.init()
   },
   methods: {
@@ -62,23 +73,30 @@ export default {
       this.repo = (await this.getRepositoryInfo()).data
       await this.getProjectInfo().catch(() => { this.isRegisted = false })
       if (this.isRegisted) {
-        this.logs = (await this.getProjectLogs()).data
+        let res = await this.getProjectLogs().catch(() => 'error')
+        if (res !== 'error') { this.logs = res.data }
+        res = (await this.getContainerStatus().catch(() => 'error'))
+        if (res !== 'error') { this.status = res.data.State.Status }
       }
       this.isGetting = false
     },
     getRepositoryInfo: function () {
       return axios.get('/api/v1/repos/' + this.$route.params.id)
     },
-    addProjects: function () {
+    addProjects: async function () {
       this.isGetting = true
-      axios.post('/api/v1/projects', { repo_id: this.repo.id })
-        .then(() => { this.getProjectInfo() })
+      await axios.post('/api/v1/projects', { repo_id: this.repo.id })
+      await this.getProjectInfo()
+      this.isGetting = false
     },
     getProjectInfo: function () {
       return axios.get('/api/v1/projects/' + this.$route.params.id)
     },
     getProjectLogs: function () {
       return axios.get('/api/v1/projects/' + this.$route.params.id + '/logs')
+    },
+    getContainerStatus: function () {
+      return axios.get('/api/v1/projects/' + this.$route.params.id + '/info')
     },
     deleteProject: function () {
       axios.delete('/api/v1/projects/' + this.$route.params.id)

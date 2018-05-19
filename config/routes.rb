@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get 'user/detail'
       get 'projects/:id',      to: 'projects#show'
       get 'projects/:id/logs', to: 'projects#logs'
+      get 'projects/:id/info', to: 'projects#info'
       resources :projects, only: %i[index create destroy]
       resources :repos, only: %i[index show]
     end
