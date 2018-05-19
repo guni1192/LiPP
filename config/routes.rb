@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get 'user/detail'
-      get 'projects/:id', to: 'projects#show'
+      get 'projects/:id',      to: 'projects#show'
+      get 'projects/:id/logs', to: 'projects#logs'
       resources :projects, only: %i[index create destroy]
       resources :repos, only: %i[index show]
     end

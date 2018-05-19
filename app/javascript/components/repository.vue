@@ -32,6 +32,10 @@
         v-else
         color="green"
         @click="addProjects">Add</v-btn>
+      <br>
+      <div v-show="logs">
+        <pre><code>{{ logs }}</code></pre>
+      </div>
     </div>
   </div>
 </template>
@@ -44,11 +48,13 @@ export default {
     return {
       repo: {},
       isGetting: true,
-      isRegisted: false
+      isRegisted: false,
+      logs: ''
     }
   },
   mounted: function () {
     this.getRepositoryInfo()
+    this.getProjectLogs()
   },
   methods: {
     getRepositoryInfo: function () {
@@ -76,6 +82,16 @@ export default {
           this.isGetting = false
         })
     },
+    getProjectLogs: function () {
+      axios.get('/api/v1/projects/' + this.$route.params.id + '/logs')
+        .then((response) => {
+          this.isGetting = false
+          this.logs = response.data
+        })
+        .catch(() => {
+          this.isGetting = false
+        })
+    },
     deleteProject: function () {
       axios.delete('/api/v1/projects/' + this.$route.params.id)
         .then(() => { this.getProjectInfo() })
@@ -87,5 +103,12 @@ export default {
 <style scoped lang="scss">
 a {
   text-decoration: none;
+}
+
+code {
+  color: white;
+  background-color: black;
+  margin: 20px;
+  padding: 20px;
 }
 </style>

@@ -8,13 +8,6 @@ module Container
       end
   end
 
-  def init_container
-    create_container
-  rescue Docker::Error::NotFoundError
-    Docker::Image.create!(fromImage: @config[:image])
-    create_container
-  end
-
   def create_container
     load_conf
     begin
@@ -34,12 +27,22 @@ module Container
     end
   end
 
-  def up_container
-    init_container
-    @container.start
-  end
-
   def container_name
     "#{deployer.name}-#{repository[:name]}"
+  end
+
+  def deploy
+    @container = create_container
+    @container.start
+    @config[:scripts].each do |script|
+      command = script[:run][:command].split(' ')
+      @container.exec(command)
+    end
+    @container.logs(stdout: true, stderr: true)
+  end
+
+  def logs
+    @container = Docker::Container.get(container_name)
+    @container.logs(stdout: true, stderr: true)
   end
 end
