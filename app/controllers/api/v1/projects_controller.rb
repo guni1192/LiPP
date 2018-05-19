@@ -28,6 +28,15 @@ module Api
         end
       end
 
+      def info
+        project = Project.find_by(repo_id: params[:id])
+        if project
+          render json: project.status
+        else
+          render json: { error: 'Not found' }, status: :not_found
+        end
+      end
+
       def create
         project = Project.new(
           user_id: User.first.uid,

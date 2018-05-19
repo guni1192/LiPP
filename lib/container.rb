@@ -38,11 +38,16 @@ module Container
       command = script[:run][:command].split(' ')
       @container.exec(command)
     end
-    @container.logs(stdout: true, stderr: true)
+    @container
   end
 
   def logs
     @container = Docker::Container.get(container_name)
     @container.logs(stdout: true, stderr: true)
+  end
+
+  def status
+    @container = Docker::Container.get(container_name)
+    @container.info
   end
 end

@@ -48,22 +48,26 @@ export default {
     return {
       repo: {},
       isGetting: true,
-      isRegisted: false,
+      isRegisted: true,
       logs: ''
     }
   },
   mounted: function () {
-    this.getRepositoryInfo()
-    this.getProjectLogs()
+    // this.getRepositoryInfo()
+    this.init()
   },
   methods: {
-    getRepositoryInfo: function () {
+    init: async function () {
       this.isGetting = true
-      axios.get('/api/v1/repos/' + this.$route.params.id)
-        .then((response) => {
-          this.repo = response.data
-          this.getProjectInfo()
-        })
+      this.repo = (await this.getRepositoryInfo()).data
+      await this.getProjectInfo().catch(() => { this.isRegisted = false })
+      if (this.isRegisted) {
+        this.logs = (await this.getProjectLogs()).data
+      }
+      this.isGetting = false
+    },
+    getRepositoryInfo: function () {
+      return axios.get('/api/v1/repos/' + this.$route.params.id)
     },
     addProjects: function () {
       this.isGetting = true
@@ -71,26 +75,10 @@ export default {
         .then(() => { this.getProjectInfo() })
     },
     getProjectInfo: function () {
-      this.isGetting = true
-      axios.get('/api/v1/projects/' + this.$route.params.id)
-        .then(() => {
-          this.isRegisted = true
-          this.isGetting = false
-        })
-        .catch(() => {
-          this.isRegisted = false
-          this.isGetting = false
-        })
+      return axios.get('/api/v1/projects/' + this.$route.params.id)
     },
     getProjectLogs: function () {
-      axios.get('/api/v1/projects/' + this.$route.params.id + '/logs')
-        .then((response) => {
-          this.isGetting = false
-          this.logs = response.data
-        })
-        .catch(() => {
-          this.isGetting = false
-        })
+      return axios.get('/api/v1/projects/' + this.$route.params.id + '/logs')
     },
     deleteProject: function () {
       axios.delete('/api/v1/projects/' + this.$route.params.id)
