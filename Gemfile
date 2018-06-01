@@ -39,6 +39,9 @@ gem 'omniauth-github'
 # GitHub API
 gem 'octokit'
 
+# Docker
+gem 'docker-api'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
