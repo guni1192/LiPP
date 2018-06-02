@@ -56,6 +56,8 @@ module Git
         active: true
       )
     rescue Octokit::UnprocessableEntity
+      logger.info 'This url is already registed!!'
+      logger.info ENV['HJWR_HOST']
     end
   end
 end
