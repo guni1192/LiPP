@@ -44,15 +44,18 @@ module Git
 
   def set_webhook
     init_client
-    @client.create_hook(
-      repository[:full_name],
-      'web',
-      {
-        url: "#{ENV['HJWR_HOST']}/hooks",
-        content_type: 'json'
-      },
-      events: ['push'],
-      active: true
-    )
+    begin
+      @client.create_hook(
+        repository[:full_name],
+        'web',
+        {
+          url: "#{ENV['HJWR_HOST']}/hooks",
+          content_type: 'json'
+        },
+        events: ['push'],
+        active: true
+      )
+    rescue Octokit::UnprocessableEntity
+    end
   end
 end
