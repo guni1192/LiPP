@@ -42,6 +42,9 @@ gem 'octokit'
 # Docker
 gem 'docker-api'
 
+# .env autoload
+gem 'dotenv-rails'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

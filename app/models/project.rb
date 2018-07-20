@@ -17,8 +17,14 @@ class Project < ApplicationRecord
 
   validates :user_id, presence: true
   validates :repo_id, presence: true, uniqueness: true
+  validates :expose,  uniqueness: true
 
-  after_save :init_client
+  before_validation do
+    repo = repository
+    self.name = repo[:name]
+    self.full_name = repo[:full_name]
+    self.gh_user = repo[:owner][:login]
+  end
 
   private
 
