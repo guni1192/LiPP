@@ -17,6 +17,7 @@ class Project < ApplicationRecord
 
   validates :user_id, presence: true
   validates :repo_id, presence: true, uniqueness: true
+  validates :expose,  uniqueness: true
 
   before_validation do
     repo = repository

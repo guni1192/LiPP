@@ -10,14 +10,16 @@ module Container
 
   def create_container
     load_conf
+    port = expose.to_s + '/tcp'
     begin
       @container = Docker::Container.create(
         name: container_name,
         Image: @config[:image],
         Tty: true,
-        ExposedPorts: { "80/tcp": {} },
+        Cmd: @config[:daemon],
+        ExposedPorts: { "#{port}": {} },
         PortBindings: {
-          "80/tcp": [{ HostPort: '8000' }]
+          "#{port}": [{ HostPort: '8000' }]
         }
       )
     rescue Docker::Error::ConflictError
@@ -44,6 +46,10 @@ module Container
   def logs
     @container = Docker::Container.get(container_name)
     @container.logs(stdout: true, stderr: true)
+  end
+
+  def assign_port
+    self.expose = 8000 - id
   end
 
   def status

@@ -21,9 +21,9 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   encoding: utf8
-  username: postgres
-  password:
   host : <%= ENV['DATABASE_HOST'] %>
+  username: postgres
+  # password:
 
 development:
   <<: *default
@@ -85,5 +85,5 @@ test:
 production:
   <<: *default
   database: hujiwara-kai_production
-  username: hujiwara-kai
-  password: <%= ENV['HUJIWARA-KAI_DATABASE_PASSWORD'] %>
+  username: postgres
+  # password: <%= ENV['HUJIWARA-KAI_DATABASE_PASSWORD'] %>

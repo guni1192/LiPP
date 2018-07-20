@@ -1,0 +1,40 @@
+version: '2'
+services:
+  db:
+    image: postgres:10.1
+    volumes:
+      - data:/var/lib/postgresql/data
+    ports:
+      - "5432"
+
+  web:
+    build: .
+    environment:
+      DATABASE_HOST: db
+      RAILS_ENV: production
+      SECRET_KEY_BASE: $SECRET_KEY_BASE
+    env_file:
+      - .env
+    volumes:
+       - tmp-data:/app/tmp
+    ports:
+      - "3000"
+    depends_on:
+      - db
+    links:
+      - db
+
+  nginx:
+    build: nginx/
+    ports:
+      - "80:80"
+    volumes_from:
+      - web
+    depends_on:
+      - web
+    links:
+      - db
+
+volumes:
+  data: {}
+  tmp-data:
