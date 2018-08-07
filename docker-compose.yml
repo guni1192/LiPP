@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   db:
     image: postgres:10.1
@@ -16,7 +16,8 @@ services:
     env_file:
       - .env
     volumes:
-       - tmp-data:/app/tmp
+      - tmp-data:/app/tmp
+      - public-data:/app/public
     ports:
       - "3000"
     depends_on:
@@ -28,8 +29,9 @@ services:
     build: nginx/
     ports:
       - "80:80"
-    volumes_from:
-      - web
+    volumes:
+      - tmp-data:/app/tmp
+      - public-data:/app/public
     depends_on:
       - web
     links:
@@ -38,3 +40,4 @@ services:
 volumes:
   data: {}
   tmp-data:
+  public-data:

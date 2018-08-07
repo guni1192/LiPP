@@ -14,6 +14,7 @@ RUN npm i -g yarn
 
 # Workspace
 RUN mkdir /app
+
 WORKDIR /app
 
 # Ruby
@@ -27,7 +28,8 @@ ADD yarn.lock /app/yarn.lock
 RUN yarn
 
 ADD . /app
-
+# ADD ./public /app/public
+# ADD ./tmp /app/tmp
 VOLUME /app/public
 VOLUME /app/tmp
 
