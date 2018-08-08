@@ -34,8 +34,8 @@ services:
       - public-data:/app/public
     depends_on:
       - web
-    links:
-      - db
+        # links:
+        # - db
 
 volumes:
   data: {}

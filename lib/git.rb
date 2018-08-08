@@ -49,7 +49,7 @@ module Git
         repository[:full_name],
         'web',
         {
-          url: "#{ENV['HJWR_HOST']}/hooks",
+          url: "#{ENV['LIPP_HOST']}/hooks",
           content_type: 'json'
         },
         events: ['push'],
@@ -57,7 +57,7 @@ module Git
       )
     rescue Octokit::UnprocessableEntity
       logger.info 'This url is already registed!!'
-      logger.info ENV['HJWR_HOST']
+      logger.info ENV['LIPP_HOST']
     end
   end
 end
