@@ -3,7 +3,7 @@
 module Container
   def load_conf
     @config =
-      File.open("#{clone_path}/hujiwara.yml", 'r') do |f|
+      File.open("#{clone_path}/lipp.yml", 'r') do |f|
         YAML.safe_load(f).with_indifferent_access
       end
   end
