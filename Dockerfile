@@ -28,9 +28,7 @@ ADD yarn.lock /app/yarn.lock
 RUN yarn
 
 ADD . /app
-# ADD ./public /app/public
-# ADD ./tmp /app/tmp
-VOLUME /app/public
-VOLUME /app/tmp
+# VOLUME /app/public
+# VOLUME /app/tmp
 
 CMD bundle exec rails s

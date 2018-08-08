@@ -56,7 +56,7 @@
       <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
       <router-link to="/">
         <v-toolbar-title class="mr-5 align-center">
-          <span class="title">Hujiwara</span>
+          <span class="title">LiPP</span>
         </v-toolbar-title>
       </router-link>
       <v-spacer/>
