@@ -7,7 +7,7 @@ services:
     ports:
       - "5432"
 
-  web:
+  api:
     build: .
     environment:
       DATABASE_HOST: db
@@ -18,6 +18,9 @@ services:
     volumes:
       - tmp-data:/app/tmp
       - public-data:/app/public
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Docker for Mac
+      - /usr/local/bin/docker:/usr/bin/docker
     ports:
       - "3000"
     depends_on:
@@ -25,7 +28,7 @@ services:
     links:
       - db
 
-  nginx:
+  web:
     build: nginx/
     ports:
       - "80:80"
@@ -33,7 +36,7 @@ services:
       - tmp-data:/app/tmp
       - public-data:/app/public
     depends_on:
-      - web
+      - api
         # links:
         # - db
 
