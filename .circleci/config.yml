@@ -1,9 +1,9 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/circleci-hujiwara-kai
+    working_directory: ~/circleci-lipp
     docker:
-      - image: circleci/ruby:2.5-node-browsers
+      - image: circleci/ruby:2.5.1-node-browsers
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
@@ -12,10 +12,10 @@ jobs:
           PGUSER: postgres
           RAILS_ENV: test
 
-      - image: circleci/postgres:9.6.2-alpine
+      - image: circleci/postgres:10.1.0-alpine
         environment:
         - POSTGRES_USER: postgres
-        - POSTGRES_DB: hujiwara-kai_test
+        - POSTGRES_DB: lipp_test
 
     steps:
       - checkout

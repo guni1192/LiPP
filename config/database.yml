@@ -27,13 +27,13 @@ default: &default
 
 development:
   <<: *default
-  database: hujiwara-kai_development
+  database: lipp_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  #username: hujiwara-kai
+  #username: lipp
 
   # The password associated with the postgres role (username).
   #password:
@@ -61,7 +61,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: hujiwara-kai_test
+  database: lipp_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -84,6 +84,6 @@ test:
 #
 production:
   <<: *default
-  database: hujiwara-kai_production
+  database: lipp_production
   username: postgres
   # password: <%= ENV['HUJIWARA-KAI_DATABASE_PASSWORD'] %>
