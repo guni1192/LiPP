@@ -24,5 +24,9 @@ SECRET_KEY_BASE=<SECRET_KEY_BASE>
 ```bash
 $ git clone git@github.com:guni973/LiPP
 $ cd LiPP
-$ docker-compose up --build
+$ docker-compose build
+$ docker-compose run --rm api bundle exec rails db:create
+$ docker-compose run --rm api bundle exec rails db:migrate
+$ docker-compose run --rm api bundle exec rails assets:precompile
+$ docker-compose up -d
 ```

@@ -5,7 +5,7 @@ services:
     volumes:
       - data:/var/lib/postgresql/data
     ports:
-      - "5432"
+      - "5432:5432"
 
   api:
     build: .
@@ -16,10 +16,10 @@ services:
     env_file:
       - .env
     volumes:
-      - tmp-data:/app/tmp
+      - tmp-data:/app/tmp/sockets
       - public-data:/app/public
-      - /var/run/docker.sock:/var/run/docker.sock
       # Docker for Mac
+      - /var/run/docker.sock:/var/run/docker.sock
       - /usr/local/bin/docker:/usr/bin/docker
     ports:
       - "3000"
@@ -33,12 +33,10 @@ services:
     ports:
       - "80:80"
     volumes:
-      - tmp-data:/app/tmp
+      - tmp-data:/app/tmp/sockets
       - public-data:/app/public
     depends_on:
       - api
-        # links:
-        # - db
 
 volumes:
   data: {}

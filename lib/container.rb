@@ -12,6 +12,7 @@ module Container
     load_conf
     port = expose.to_s + '/tcp'
     begin
+      Docker::Image.create!(fromImage: @config[:image])
       @container = Docker::Container.create(
         name: container_name,
         Image: @config[:image],
@@ -34,6 +35,7 @@ module Container
   end
 
   def deploy
+    # @container = Docker::Container.get(container_name)
     @container = create_container
     @container.start
     @config[:scripts].each do |script|
@@ -46,6 +48,15 @@ module Container
   def logs
     @container = Docker::Container.get(container_name)
     @container.logs(stdout: true, stderr: true)
+  end
+
+  def delete_container
+    @container = Docker::Container.get(container_name)
+    @container.delete(force: true)
+  end
+
+  def container_info
+    Docker::Container.get(container_name)
   end
 
   def assign_port
